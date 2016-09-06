@@ -42,7 +42,11 @@ public class BankSystemImpl implements BankSystem {
     @Override
     public void transferMoney(User fromUser, User toUser, int amount) {
 
-        /** transferring money between accounts with same currency only*/
+        /**
+         * transferring money is possible between accounts with same currency only;
+         * limitations are not taken into account
+         * commission is charged from the 'fromUser'
+         * */
         if (fromUser.getBank().getCurrency()==toUser.getBank().getCurrency()){
 
             double amountWithCommission = amount * (1 + (double) fromUser.getBank().getCommission(amount) / 100);

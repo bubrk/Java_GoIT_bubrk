@@ -3,26 +3,26 @@ package module4.task1;
 import module4.task2.Currency;
 
 /**
- *******************************************************************
- ЗАДАНИЕ 1
- *******************************************************************
- Abstract class Bank should contain fields
- long id
- String bankCountry
- Currency currency
- int numberOfEmployees
- double avrSalaryOfEmployee
- long rating
- long totalCapital
-
- Generate getters and setters. And create constructor with all fields.
-
- Methods are:
- abstract int getLimitOfWithdrawal()
- abstract int getLimitOfFunding()
- abstract int getMonthlyRate()
- abstract int getCommission()
- double moneyPaidMonthlyForSalary()
+ * ******************************************************************
+ * ЗАДАНИЕ 1
+ * ******************************************************************
+ * Abstract class Bank should contain fields
+ * long id
+ * String bankCountry
+ * Currency currency
+ * int numberOfEmployees
+ * double avrSalaryOfEmployee
+ * long rating
+ * long totalCapital
+ * <p>
+ * Generate getters and setters. And create constructor with all fields.
+ * <p>
+ * Methods are:
+ * abstract int getLimitOfWithdrawal()
+ * abstract int getLimitOfFunding()
+ * abstract int getMonthlyRate()
+ * abstract int getCommission()
+ * double moneyPaidMonthlyForSalary()
  */
 abstract public class Bank {
     private long id;
@@ -103,11 +103,14 @@ abstract public class Bank {
 
     abstract public int getLimitOfFunding();
 
-    abstract public double getMonthlyRate(); // changed from int to double
+    /** changed from int to double */
+    abstract public double getMonthlyRate();
 
-    abstract public int getCommission(double amount); // added parameter amount
+    /** added parameter amount */
+    abstract public int getCommission(double amount);
 
-    public double moneyPaidMonthlyForSalary(){  //changed to non-abstract
-        return this.getNumberOfEmployees()*this.getAvrSalaryOfEmployee();
+    /** redefined to non-abstract because realisation is the same in all sub-classes */
+    public double moneyPaidMonthlyForSalary() {  //changed to non-abstract
+        return this.getNumberOfEmployees() * this.getAvrSalaryOfEmployee();
     }
 }
