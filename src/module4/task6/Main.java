@@ -5,6 +5,7 @@ import module4.task3.ChinaBank;
 import module4.task3.EUBank;
 import module4.task3.USBank;
 import module4.task4.User;
+import module4.task5.BankSystem;
 import module4.task5.BankSystemImpl;
 
 /**
@@ -40,7 +41,7 @@ public class Main {
                 new ChinaBank(6,"Hong Kong", Currency.EUR,400,2200,95,20000000));
 
 
-        BankSystemImpl bankSystem = new BankSystemImpl();
+        BankSystem bankSystem = new BankSystemImpl();
 
         System.out.println("Initializing user1:");
         System.out.println(user1.toString());
@@ -66,6 +67,5 @@ public class Main {
         System.out.println("Paying salary to user1:");
         bankSystem.paySalary(user1);
         System.out.println(user1.toString());
-
     }
 }
