@@ -3,7 +3,10 @@ package module7.task3;
 import module7.task1.Order;
 import module7.task1.User;
 
-import java.util.*;
+import java.util.Currency;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * Create Main class where you create 10 Orders with 10 Users and put it to the TreeSet. You should create 8 unique and
@@ -45,11 +48,11 @@ public class Main {
         printSet(orderSet);
 
         //getting order with largest prise
-        System.out.println("\nOrder with largest prise:\n"+getLargestOrder(orderSet).toString());
+        System.out.println("\nOrder with largest prise:\n" + getLargestOrder(orderSet).toString());
 
         //deleting orders with USD currency
-        System.out.println("\n"+deletingUSDOrders(orderSet)+" orders with USD currency were deleted\nSet after deleting:");
-        printSet(orderSet);
+        System.out.println("\nOrders with USD currency were deleted\nSet after deleting:");
+        printSet(deletingUSDOrders(orderSet));
 
     }
 
@@ -58,33 +61,41 @@ public class Main {
      */
     private static Order getLargestOrder(TreeSet<Order> set) {
 
-        return set.last();
+        //return set.last();
+
+        return set.stream()
+                .max((a, b) -> Integer.compare(a.getPrice(), b.getPrice()))
+                .get();
     }
 
     /**
      * Deleting orders where currency is USD using Iterator
      */
-    private static int deletingUSDOrders(TreeSet<Order> set) {
-        int counter = 0;
-
-        Iterator iterator = set.iterator();
+    private static Set<Order> deletingUSDOrders(TreeSet<Order> set) {
+/*        Set<Order> result = new TreeSet(set);
+        Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Order nextOrder = (Order) iterator.next();
             if (nextOrder.getCurrency() == Currency.getInstance("USD")) {
                 iterator.remove();
-                counter++;
             }
         }
 
-        return counter;
+        return result;*/
+
+        return set.stream()
+                .filter(order -> order.getCurrency() != Currency.getInstance("USD"))
+                .collect(Collectors.toSet());
     }
 
     /**
      * Printing sets in console
      */
     private static void printSet(Set set) {
-        for (Object o : set) {
+/*        for (Object o : set) {
             System.out.println(o);
-        }
+        }*/
+        System.out.println(set.stream()
+                .reduce("", (a, b) -> a + "\n" + b));
     }
 }

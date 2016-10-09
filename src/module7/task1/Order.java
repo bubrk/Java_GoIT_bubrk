@@ -119,10 +119,7 @@ public class Order implements Comparable<Order> {
         int result = Integer.compare(this.price, o.getPrice());
 
         if (result == 0) {
-            if (this.currency.equals(o.getCurrency()) &&
-                    this.itemName == o.getItemName() &&
-                    this.shopIdentificator == o.shopIdentificator &&
-                    this.user.equals(o.getUser())) {
+            if (this.equals(o)) {
                 return 0;
             } else {
                 return -1;

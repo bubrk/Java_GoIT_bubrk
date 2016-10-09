@@ -4,6 +4,7 @@ import module7.task1.Order;
 import module7.task1.User;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Create Main class where you create 10 Orders with 10 Users and put it to the List
@@ -64,10 +65,10 @@ public class Main {
         printList(deleteOrdersPriseLessThan1500(orderList));
 
         System.out.println("-----------\nOrders in USD:");
-        printList(separateOrderByCurrency(orderList).get(0));
+        printList(separateOrderByCurrency(orderList).get(Currency.getInstance("USD")));
 
         System.out.println("-----------\nOrders in UAH:");
-        printList(separateOrderByCurrency(orderList).get(1));
+        printList(separateOrderByCurrency(orderList).get(Currency.getInstance("UAH")));
 
         Map<String, List<Order>> ordersByCities = separateOrderByCities(orderList);
         Set<String> cities = ordersByCities.keySet();
@@ -134,7 +135,7 @@ public class Main {
      * Deleting duplicates from the list
      */
     private static List<Order> deleteOrderDuplicates(List<Order> list) {
-        List<Order> newList = new ArrayList<>();
+/*        List<Order> newList = new ArrayList<>();
         for (Order o1 : list) {
             boolean isInNewList = false;
             for (Order o2 : newList) {
@@ -147,30 +148,33 @@ public class Main {
                 newList.add(o1);
             }
         }
-        return newList;
+        return newList;*/
 
-        /*Set<Order> set = new HashSet<>(list);
-        return new ArrayList<>(set);*/
+        //variant2
+        return new ArrayList<>(new HashSet<>(list));
     }
 
     /**
      * Deleting items where price less than 1500
      */
     private static List<Order> deleteOrdersPriseLessThan1500(List<Order> list) {
-        List<Order> newList = new ArrayList<>();
+/*        List<Order> result = new ArrayList<>();
         for (Order o : list) {
             if (o.getPrice() >= 1500) {
-                newList.add(o);
+                result.add(o);
             }
-        }
-        return newList;
+        }*/
+
+        return list.stream()
+                .filter(order -> order.getPrice() >= 1500)
+                .collect(Collectors.toList());
     }
 
     /**
      * Separating list for two lists - orders in USD and UAH
      */
-    private static List<List<Order>> separateOrderByCurrency(List<Order> list) {
-        List<Order> ordersUSD = new ArrayList<>();
+    private static Map<Currency, List<Order>> separateOrderByCurrency(List<Order> list) {
+/*        List<Order> ordersUSD = new ArrayList<>();
         List<Order> ordersUAH = new ArrayList<>();
         for (Order order : list) {
             if (order.getCurrency() == Currency.getInstance("USD")) {
@@ -180,9 +184,15 @@ public class Main {
             }
         }
 
-        List<List<Order>> result = new ArrayList<>();
-        result.add(ordersUSD);
-        result.add(ordersUAH);
+        Map<Currency,List<Order>> result = new HashMap<>();
+        result.put(Currency.getInstance("USD"),ordersUSD);
+        result.put(Currency.getInstance("UAH"),ordersUAH);*/
+
+        Map<Currency, List<Order>> result;
+        result = list.stream()
+                .collect(
+                        Collectors.groupingBy(
+                                Order::getCurrency));
 
         return result;
     }
@@ -191,15 +201,21 @@ public class Main {
      * Separating list for as many lists as many unique cities are in User
      */
     private static Map<String, List<Order>> separateOrderByCities(List<Order> list) {
-        Map<String, List<Order>> result = new HashMap<>();
-        for (Order order : list) {
+        Map<String, List<Order>> result;
+/*        for (Order order : list) {
             if (result.containsKey(order.getUser().getCity())) {
                 result.get(order.getUser().getCity()).add(order);
             } else {
                 result.put(order.getUser().getCity(), new ArrayList<>());
                 result.get(order.getUser().getCity()).add(order);
             }
-        }
+        }*/
+
+        result = list.stream()
+                .collect(
+                        Collectors.groupingBy(
+                                Order::getShopIdentificator));//how to access Order.getUser().getCity() here?
+
         return result;
     }
 
@@ -207,8 +223,10 @@ public class Main {
      * Printing lists in console
      */
     private static void printList(List list) {
-        for (Object o : list) {
+/*        for (Object o : list) {
             System.out.println(o);
-        }
+        }*/
+        System.out.println(list.stream()
+                .reduce("", (a, b) -> a + "\n" + b));
     }
 }
