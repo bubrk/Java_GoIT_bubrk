@@ -6,7 +6,10 @@ import task4.BookingComAPI;
 import task4.GoogleAPI;
 import task4.TripAdvisorAPI;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * ЗАДАНИЕ 6
@@ -22,40 +25,31 @@ import java.util.Arrays;
  * Chech how many the same rooms two different apis return
  */
 public class Controller {
-    private API apis[] = new API[3];
 
-    public Room[] requestRooms(int price, int persons, String city, String hotel) {
+    private Map<String,API> apis = new HashMap<>();
 
-        Room[] result = new Room[0];
+    public Set<Room> requestRooms(int price, int persons, String city, String hotel) {
 
-        for (API api : apis) {
-            Room[] foundRoom = api.findRooms(price, persons, city, hotel);
-            if (foundRoom.length > 0) {
-                result = Arrays.copyOf(result, result.length + foundRoom.length);
-                System.arraycopy(foundRoom, 0, result, result.length - foundRoom.length, foundRoom.length);
-            }
+        Set<Room> result = new HashSet<>();
+
+        for (API api : apis.values()) {
+            result.addAll(api.findRooms(price, persons, city, hotel));
         }
 
         return result;
 
     }
 
-    public Room[] check(API api1, API api2) {
-        Room[] result = new Room[0];
+    public Set<Room> check(API api1, API api2) {
+        Set<Room> result = new HashSet<>();
 
-        Room[] roomsAPI1 = api1.getRooms();
-        Room[] roomsAPI2 = api2.getRooms();
+        Set<Room> roomsAPI1 = api1.getRooms();
+        Set<Room> roomsAPI2 = api2.getRooms();
 
-        if (roomsAPI1.length > 0 && roomsAPI2.length > 0) {
-            int i = 0;
-            for (Room room1 : roomsAPI1) {
-                for (Room room2 : roomsAPI2) {
-                    if (room1.equals(room2)) {
-                        result = Arrays.copyOf(result, i + 1);
-                        result[i]=room1;
-                        i++;
-                        break;
-                    }
+        if (roomsAPI1.size() > 0 && roomsAPI2.size() > 0) {
+            for (Room room : roomsAPI1) {
+                if (roomsAPI2.contains(room)) {
+                    result.add(room);
                 }
             }
         }
@@ -63,12 +57,16 @@ public class Controller {
     }
 
     public Controller() {
-        apis[0] = new BookingComAPI();
-        apis[1] = new GoogleAPI();
-        apis[2] = new TripAdvisorAPI();
+        apis.put("BookingCom",new BookingComAPI());
+        apis.put("Google",new GoogleAPI());
+        apis.put("TripAdvisor",new TripAdvisorAPI());
     }
 
-    public API[] getApis() {
+    public Map<String,API> getApis() {
         return apis;
+    }
+
+    public API getApi(String name){
+        return apis.get(name);
     }
 }
