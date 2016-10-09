@@ -5,7 +5,7 @@ import module5.task5.DAO;
 import module5.task5.DAOImpl;
 import module5.task6.Controller;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * ЗАДАНИЕ 7
@@ -19,7 +19,7 @@ public class Main {
         Controller controller = new Controller();
 
         System.out.println("Looking for the room: price=100, persons=1, city=\"London\", Hotel=\"Paradise\"...");
-        Set<Room> requestedRooms = controller.requestRooms(100, 1, "London", "Paradise");
+        List<Room> requestedRooms = controller.requestRooms(100, 1, "London", "Paradise");
         if (requestedRooms.size() > 0) {
             System.out.println("List of requested room: ");
             int i = 1;
@@ -32,7 +32,7 @@ public class Main {
         }
 
         System.out.println("\nLooking for same rooms between BookingComAPI and GoogleAPI...");
-        Set<Room> sameRooms = controller.check(controller.getApi("BookingCom"),controller.getApi("Google"));
+        List<Room> sameRooms = controller.check(controller.getApi("BookingCom"),controller.getApi("Google"));
         if (sameRooms.size() > 0) {
             System.out.println("There is/are "+sameRooms.size()+" same room(s). This is the list:");
             int i = 1;

@@ -5,10 +5,7 @@ import module5.task3.API;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * ЗАДАНИЕ 4
@@ -16,16 +13,16 @@ import java.util.Set;
  * variable Rooms[] rooms which must be initialized in empty constructor with 5 differentRooms.
  */
 public class GoogleAPI implements API {
-    private Set<Room> rooms;
+    private List<Room> rooms;
 
     @Override
-    public Set<Room> getRooms() {
+    public List<Room> getRooms() {
         return rooms;
     }
 
     @Override
-    public Set<Room> findRooms(int price, int persons, String city, String hotel) {
-        Set<Room> result = new HashSet<>();
+    public List<Room> findRooms(int price, int persons, String city, String hotel) {
+        List<Room> result = new LinkedList<>();
 
         //findRoom - room we are looking for. price,persons,hotel,city matter
         Room findRoom = new Room(0, price, persons, new Date(), hotel, city);
@@ -64,6 +61,6 @@ public class GoogleAPI implements API {
             //let's hope this is not gonna happen
             System.out.println("Huston, we have a problem...");
         }
-        this.rooms = new HashSet<>(Arrays.asList(array));
+        this.rooms = new LinkedList<>(Arrays.asList(array));
     }
 }

@@ -6,10 +6,7 @@ import module5.task4.BookingComAPI;
 import module5.task4.GoogleAPI;
 import module5.task4.TripAdvisorAPI;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * ЗАДАНИЕ 6
@@ -28,9 +25,9 @@ public class Controller {
 
     private Map<String,API> apis = new HashMap<>();
 
-    public Set<Room> requestRooms(int price, int persons, String city, String hotel) {
+    public List<Room> requestRooms(int price, int persons, String city, String hotel) {
 
-        Set<Room> result = new HashSet<>();
+        List<Room> result = new LinkedList<>();
 
         for (API api : apis.values()) {
             result.addAll(api.findRooms(price, persons, city, hotel));
@@ -40,11 +37,11 @@ public class Controller {
 
     }
 
-    public Set<Room> check(API api1, API api2) {
-        Set<Room> result = new HashSet<>();
+    public List<Room> check(API api1, API api2) {
+        List<Room> result = new LinkedList<>();
 
-        Set<Room> roomsAPI1 = api1.getRooms();
-        Set<Room> roomsAPI2 = api2.getRooms();
+        List<Room> roomsAPI1 = api1.getRooms();
+        List<Room> roomsAPI2 = api2.getRooms();
 
         if (roomsAPI1.size() > 0 && roomsAPI2.size() > 0) {
             for (Room room : roomsAPI1) {
