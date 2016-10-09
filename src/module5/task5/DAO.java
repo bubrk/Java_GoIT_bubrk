@@ -1,6 +1,6 @@
-package task5;
+package module5.task5;
 
-import task1_2.Room;
+import module5.task1_2.Room;
 
 /**
  * ЗАДАНИЕ 5

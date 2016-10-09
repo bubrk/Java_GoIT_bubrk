@@ -1,10 +1,10 @@
-package task6;
+package module5.task6;
 
-import task1_2.Room;
-import task3.API;
-import task4.BookingComAPI;
-import task4.GoogleAPI;
-import task4.TripAdvisorAPI;
+import module5.task1_2.Room;
+import module5.task3.API;
+import module5.task4.BookingComAPI;
+import module5.task4.GoogleAPI;
+import module5.task4.TripAdvisorAPI;
 
 import java.util.HashMap;
 import java.util.HashSet;

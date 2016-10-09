@@ -1,4 +1,4 @@
-package task1_2;
+package module5.task1_2;
 
 import java.util.Date;
 

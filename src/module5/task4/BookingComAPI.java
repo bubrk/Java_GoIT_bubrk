@@ -1,7 +1,7 @@
-package task4;
+package module5.task4;
 
-import task1_2.Room;
-import task3.API;
+import module5.task1_2.Room;
+import module5.task3.API;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
