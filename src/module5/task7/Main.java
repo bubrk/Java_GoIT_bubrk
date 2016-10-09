@@ -1,9 +1,9 @@
-package task7;
+package module5.task7;
 
-import task1_2.Room;
-import task5.DAO;
-import task5.DAOImpl;
-import task6.Controller;
+import module5.task1_2.Room;
+import module5.task5.DAO;
+import module5.task5.DAOImpl;
+import module5.task6.Controller;
 
 /**
  * ЗАДАНИЕ 7
