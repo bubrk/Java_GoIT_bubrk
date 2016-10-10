@@ -214,7 +214,7 @@ public class Main {
         result = list.stream()
                 .collect(
                         Collectors.groupingBy(
-                                Order::getShopIdentificator));//how to access Order.getUser().getCity() here?
+                                o -> o.getUser().getCity()));
 
         return result;
     }
