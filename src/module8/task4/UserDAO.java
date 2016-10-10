@@ -51,15 +51,20 @@ public class UserDAO extends AbstractDAOImpl<User> {
     }
 
     @Override
-    public List getList() {
+    public List<User> getList() {
         return super.getList();
     }
 
     public void deleteById(long id) {
-        //super.deleteById(id);
+        User user= get(id);
+        delete(user);
     }
 
     public User get(long id) {
-        //return super.get(id);
+        List<User> list = super.getList();
+        return list.stream()
+                .filter(e -> e.getId()==id)
+                .findAny()
+                .orElse(null);
     }
 }
