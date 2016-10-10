@@ -1,4 +1,4 @@
-package module8;
+package module8.task1;
 
 import java.util.List;
 
@@ -13,14 +13,14 @@ import java.util.List;
  * void saveAll(List T)
  * List T getList()
  */
-public interface AbstractDAO <T>{
-    T save(T element);
+public interface AbstractDAO<T> {
+    void save(T element);
 
     void delete(T element);
 
-    void deleteAll(List T);
+    void deleteAll(List<T> list);
 
-    void saveAll(List T);
+    void saveAll(List<T> list);
 
-    List <T> getList();
+    List<T> getList();
 }
