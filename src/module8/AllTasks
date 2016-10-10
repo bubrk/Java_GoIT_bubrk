@@ -1,0 +1,9 @@
+Create universal interface AbstractDAO (T) with following methods
+
+List ---- out DB emulator
+
+T save(T)
+void delete(T)
+void deleteAll(List T)
+void saveAll(List T)
+List T getList()
