@@ -1,4 +1,4 @@
-package task1;
+package module_10.task1;
 
 /**
  * Create a class with a main( ) that throws an object of class Exception inside a try block. Give the constructor for

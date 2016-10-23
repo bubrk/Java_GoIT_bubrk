@@ -1,4 +1,4 @@
-package task3;
+package module_10.task3;
 
 import java.util.Set;
 

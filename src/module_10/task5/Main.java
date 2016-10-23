@@ -1,4 +1,4 @@
-package task5;
+package module_10.task5;
 
 /**
  * Create three new types of exceptions. Write a class with a method that throws all three. In main( ), call the method

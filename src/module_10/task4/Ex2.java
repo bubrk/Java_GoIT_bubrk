@@ -1,4 +1,4 @@
-package task4;
+package module_10.task4;
 
 /**
  * Defining another exception

@@ -1,4 +1,4 @@
-package task4;
+package module_10.task4;
 
 /**
  * Create a class with two methods, f( ) and g( ). In g( ), throw an exception of a new type that you define. In f( ),

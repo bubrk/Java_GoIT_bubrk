@@ -1,4 +1,4 @@
-package task2;
+package module_10.task2;
 
 /**
  * Create your own exception class using the extends keyword. Write a constructor for this class that takes a String

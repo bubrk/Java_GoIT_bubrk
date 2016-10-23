@@ -1,14 +1,10 @@
-package task4;
+package module_10.task5;
 
 /**
  * Defining exception
  */
 public class Ex1 extends Exception {
-    private String exMessage;
-
-    public Ex1(String exMessage) {
-        this.exMessage = exMessage;
-    }
+    private String exMessage = "Exception 1";
 
     @Override
     public String getMessage() {
