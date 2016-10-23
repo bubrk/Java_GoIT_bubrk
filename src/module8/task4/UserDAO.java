@@ -3,6 +3,7 @@ package module8.task4;
 import module8.task3.AbstractDAOImpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * ЗАДАНИЕ 4
@@ -28,6 +29,7 @@ public class UserDAO extends AbstractDAOImpl<User> {
 
     @Override
     public List<User> getList() {
+        //converting List<Object> to List<User>
         return super.getList();
     }
 
