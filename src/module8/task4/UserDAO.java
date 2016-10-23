@@ -26,44 +26,20 @@ import java.util.List;
  */
 public class UserDAO extends AbstractDAOImpl<User> {
 
-    public UserDAO() {
-        super();
-    }
-
-    @Override
-    public void save(User user) {
-        super.save(user);
-    }
-
-    @Override
-    public void delete(User element) {
-        super.delete(element);
-    }
-
-    @Override
-    public void deleteAll(List<User> list) {
-        super.deleteAll(list);
-    }
-
-    @Override
-    public void saveAll(List<User> list) {
-        super.saveAll(list);
-    }
-
     @Override
     public List<User> getList() {
         return super.getList();
     }
 
     public void deleteById(long id) {
-        User user= get(id);
+        User user = get(id);
         delete(user);
     }
 
     public User get(long id) {
         List<User> list = super.getList();
         return list.stream()
-                .filter(e -> e.getId()==id)
+                .filter(e -> e.getId() == id)
                 .findAny()
                 .orElse(null);
     }
