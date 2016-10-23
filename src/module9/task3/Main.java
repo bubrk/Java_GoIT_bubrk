@@ -1,7 +1,7 @@
-package module7.task3;
+package module9.task3;
 
-import module7.task1.Order;
-import module7.task1.User;
+import module9.task1.Order;
+import module9.task1.User;
 
 import java.util.Currency;
 import java.util.Set;
@@ -61,8 +61,6 @@ public class Main {
      */
     private static Order getLargestOrder(TreeSet<Order> set) {
 
-        //return set.last();
-
         return set.stream()
                 .max((a, b) -> Integer.compare(a.getPrice(), b.getPrice()))
                 .get();
@@ -72,16 +70,6 @@ public class Main {
      * Deleting orders where currency is USD using Iterator
      */
     private static Set<Order> deletingUSDOrders(TreeSet<Order> set) {
-/*        Set<Order> result = new TreeSet(set);
-        Iterator iterator = result.iterator();
-        while (iterator.hasNext()) {
-            Order nextOrder = (Order) iterator.next();
-            if (nextOrder.getCurrency() == Currency.getInstance("USD")) {
-                iterator.remove();
-            }
-        }
-
-        return result;*/
 
         return set.stream()
                 .filter(order -> order.getCurrency() != Currency.getInstance("USD"))
@@ -92,10 +80,6 @@ public class Main {
      * Printing sets in console
      */
     private static void printSet(Set set) {
-/*        for (Object o : set) {
-            System.out.println(o);
-        }*/
-        System.out.println(set.stream()
-                .reduce("", (a, b) -> a + "\n" + b));
+        set.forEach(System.out::println);
     }
 }

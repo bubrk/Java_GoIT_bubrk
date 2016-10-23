@@ -1,7 +1,7 @@
-package module7.task2;
+package module9.task2;
 
-import module7.task1.Order;
-import module7.task1.User;
+import module9.task1.Order;
+import module9.task1.User;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -83,87 +83,56 @@ public class Main {
      * Sorting list by Order price in decrease order
      */
     private static List<Order> sortByPriseDecrease(List<Order> list) {
-        List<Order> sortedList = new ArrayList<>(list);
 
-        Collections.sort(sortedList, new Comparator<Order>() {
-            @Override
-            public int compare(Order o1, Order o2) {
-                return (o1.getPrice() > o2.getPrice() ? -1 :
-                        (o1.getPrice() == o2.getPrice() ? 0 : 1));
-            }
-        });
-        return sortedList;
+        return list.stream()
+                .sorted((o1,o2) -> (o1.getPrice() > o2.getPrice() ? -1 :
+                        (o1.getPrice() == o2.getPrice() ? 0 : 1)))
+                .collect(Collectors.toList());
     }
 
     /**
      * Sorting list by Order price in increase order AND User city
      */
     private static List<Order> sortByPriseCityIncrease(List<Order> list) {
-        List<Order> sortedList = new ArrayList<>(list);
 
-        Collections.sort(sortedList, new Comparator<Order>() {
-            @Override
-            public int compare(Order o1, Order o2) {
-                return (o1.getPrice() < o2.getPrice() ? -1 :
+        return list.stream()
+                .sorted((o1, o2) -> (o1.getPrice() < o2.getPrice() ? -1 :
                         (o1.getPrice() > o2.getPrice() ? 1 :
-                                o1.getUser().getCity().compareTo(o2.getUser().getCity())));
-            }
-        });
-        return sortedList;
+                                o1.getUser().getCity().compareTo(o2.getUser().getCity()))))
+                .collect(Collectors.toList());
     }
 
     /**
      * Sorting list by Order itemName AND ShopIdentificator AND User city
      */
     private static List<Order> sortByItemShopCityIncrease(List<Order> list) {
-        List<Order> sortedList = new ArrayList<>(list);
 
-        Collections.sort(sortedList, new Comparator<Order>() {
-            @Override
-            public int compare(Order o1, Order o2) {
-                if (o1.getItemName().compareTo(o2.getItemName()) != 0) {
-                    return o1.getItemName().compareTo(o2.getItemName());
-                } else if (o1.getShopIdentificator().compareTo(o2.getShopIdentificator()) != 0) {
-                    return o1.getShopIdentificator().compareTo(o2.getShopIdentificator());
-                } else return o1.getUser().getCity().compareTo(o2.getUser().getCity());
-            }
-        });
-        return sortedList;
+        return list.stream()
+                .sorted((o1, o2) -> {
+                    if (o1.getItemName().compareTo(o2.getItemName()) != 0) {
+                        return o1.getItemName().compareTo(o2.getItemName());
+                    } else if (o1.getShopIdentificator().compareTo(o2.getShopIdentificator()) != 0) {
+                        return o1.getShopIdentificator().compareTo(o2.getShopIdentificator());
+                    } else return o1.getUser().getCity().compareTo(o2.getUser().getCity());
+                })
+                .collect(Collectors.toList());
+
     }
 
     /**
      * Deleting duplicates from the list
      */
     private static List<Order> deleteOrderDuplicates(List<Order> list) {
-/*        List<Order> newList = new ArrayList<>();
-        for (Order o1 : list) {
-            boolean isInNewList = false;
-            for (Order o2 : newList) {
-                if (o1.equals(o2)) {
-                    isInNewList = true;
-                    break;
-                }
-            }
-            if (!isInNewList) {
-                newList.add(o1);
-            }
-        }
-        return newList;*/
 
-        //variant2
-        return new ArrayList<>(new HashSet<>(list));
+        return list.stream()
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     /**
      * Deleting items where price less than 1500
      */
     private static List<Order> deleteOrdersPriseLessThan1500(List<Order> list) {
-/*        List<Order> result = new ArrayList<>();
-        for (Order o : list) {
-            if (o.getPrice() >= 1500) {
-                result.add(o);
-            }
-        }*/
 
         return list.stream()
                 .filter(order -> order.getPrice() >= 1500)
@@ -174,19 +143,6 @@ public class Main {
      * Separating list for two lists - orders in USD and UAH
      */
     private static Map<Currency, List<Order>> separateOrderByCurrency(List<Order> list) {
-/*        List<Order> ordersUSD = new ArrayList<>();
-        List<Order> ordersUAH = new ArrayList<>();
-        for (Order order : list) {
-            if (order.getCurrency() == Currency.getInstance("USD")) {
-                ordersUSD.add(order);
-            } else if (order.getCurrency() == Currency.getInstance("UAH")) {
-                ordersUAH.add(order);
-            }
-        }
-
-        Map<Currency,List<Order>> result = new HashMap<>();
-        result.put(Currency.getInstance("USD"),ordersUSD);
-        result.put(Currency.getInstance("UAH"),ordersUAH);*/
 
         Map<Currency, List<Order>> result;
         result = list.stream()
@@ -202,14 +158,6 @@ public class Main {
      */
     private static Map<String, List<Order>> separateOrderByCities(List<Order> list) {
         Map<String, List<Order>> result;
-/*        for (Order order : list) {
-            if (result.containsKey(order.getUser().getCity())) {
-                result.get(order.getUser().getCity()).add(order);
-            } else {
-                result.put(order.getUser().getCity(), new ArrayList<>());
-                result.get(order.getUser().getCity()).add(order);
-            }
-        }*/
 
         result = list.stream()
                 .collect(
@@ -223,10 +171,6 @@ public class Main {
      * Printing lists in console
      */
     private static void printList(List list) {
-/*        for (Object o : list) {
-            System.out.println(o);
-        }*/
-        System.out.println(list.stream()
-                .reduce("", (a, b) -> a + "\n" + b));
+        list.forEach(System.out::println);
     }
 }
