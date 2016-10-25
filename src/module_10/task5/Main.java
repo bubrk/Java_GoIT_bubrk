@@ -21,7 +21,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             myMethod();
-        } catch (Exception e) {
+        } catch (Ex1 | Ex2 | Ex3 e) {
             System.out.println("We've got exception - " + e.getMessage());
         }
     }
