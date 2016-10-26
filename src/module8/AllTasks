@@ -1,0 +1,40 @@
+Create universal interface AbstractDAO (T) with following methods
+
+List ---- out DB emulator
+
+T save(T)
+void delete(T)
+void deleteAll(List T)
+void saveAll(List T)
+List T getList()
+
+ЗАДАНИЕ 2
+
+Create universal interface AbstractDAO (T) with following methods
+List ---- out DB emulator
+
+void deleteById(long id)
+T get(long id)
+
+ЗАДАНИЕ 3
+
+Make implementation AbstractDAOImpl
+
+ЗАДАНИЕ 4
+
+Create UserDAO that exdents AbstractDAOImpl and has the same methods
+
+User class:
+long id
+String name
+
+Еxample:
+
+
+UserDAO extends .. {
+     User save(User user) {
+          save(user);
+          return user;
+     }
+
+}
