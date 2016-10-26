@@ -1,4 +1,4 @@
-package module7.task1;
+package module9.task1;
 
 /**
  * ЗАДАНИЕ 1
